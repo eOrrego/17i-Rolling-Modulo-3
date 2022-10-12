@@ -1,17 +1,20 @@
-import logo from './logo.svg';
-import './App.css';
+import Navbar from './components/Navbar/Navbar';
+import Card from './components/Card/Card';
+import {productos} from './utils/productos';
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Hola desde mi APP de React
-        </p>
-      </header>
-    </div>
+    <>
+      <Navbar />
+      <div className="container">
+        <div className="row mt-5">
+          {productos.map((producto) => (
+            <Card key={producto.id} name={producto.title} stock={producto.rating.count} img={producto.image} />
+          ))}
+        </div>
+      </div>
+    </>
   );
-}
+};
 
 export default App;
