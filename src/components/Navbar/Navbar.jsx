@@ -1,9 +1,11 @@
-const Navbar = () => {
+const Navbar = (props) => {
+  //Ejemplo de desestructuración
+  const {title} = props;
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
       <div className="container-fluid">
         <a className="navbar-brand" href="/">
-          Rolling Code School
+          {title}
         </a>
         <button
           className="navbar-toggler"

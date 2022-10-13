@@ -186,3 +186,5 @@ export const productos = [
 ];
 
 export const categorias = [];
+
+export const usuarios = []
