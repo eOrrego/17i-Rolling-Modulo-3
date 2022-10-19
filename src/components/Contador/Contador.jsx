@@ -1,10 +1,14 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import ButtonCount from '../ButtonCount/ButtonCount';
 
 const Contador = ({initialStateCount = 0}) => {
   //El useState nos devuelve 2 valores: 1>El estado 2>La función para cambiar ese estado.
   //Sintaxis: Siempre la función que setea el estado, debe llamarse igual, con la palabra set antes y con camelCase.
   const [count, setCount] = useState(initialStateCount);
+
+  useEffect(() => {
+    console.log(`Has hecho click ${count} veces`)
+  })
 
   const handlerIncrement = () => {
     setCount(count + 1)

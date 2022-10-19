@@ -1,5 +1,6 @@
 import Navbar from './components/Navbar/Navbar';
 import Contador from './components/Contador/Contador';
+import EjemploUseEffect from './components/Ejemplo-UseEffect/EjemploUseEffect';
 import Card from './components/Card/Card'; // Se importa de esta manera porque el export del archivo es un export default
 import {productos} from './utils/data'; //Se importa de esta manera porque hay varios export deontro del archivo
 
@@ -11,7 +12,7 @@ const App = () => {
       <Navbar title="Rolling Code School" logo='logo' />
       <div className="container">
         <div className="row my-5">
-        <Contador initialStateCount={5000}/>
+        <Contador />
         </div>
       </div>
       <div className="container">
@@ -26,6 +27,7 @@ const App = () => {
           )).slice(0, 4)}
         </div>
       </div>
+      <EjemploUseEffect />
     </>
   );
 };
