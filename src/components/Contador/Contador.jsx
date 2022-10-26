@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import ButtonCount from '../ButtonCount/ButtonCount';
 
+//Podemos setear por default un prop.
 const Contador = ({initialStateCount = 0}) => {
   //El useState nos devuelve 2 valores: 1>El estado 2>La función para cambiar ese estado.
   //Sintaxis: Siempre la función que setea el estado, debe llamarse igual, con la palabra set antes y con camelCase.

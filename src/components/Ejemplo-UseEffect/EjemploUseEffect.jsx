@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { productos } from '../../utils/data';
+// import { productos } from '../../utils/data';
 
 const EjemploUseEffect = () => {
   const id = ''
@@ -21,24 +21,24 @@ const EjemploUseEffect = () => {
     };
   }, [])
 
-  const buscarProductoPorId = (id) => productos.find(producto => producto.id === id);
+  // const buscarProductoPorId = (id) => productos.find(producto => producto.id === id);
   
-  const buscarProducto = (id) => {
-    return new Promise((resolve, reject) => {
-      setTimeout(() => {
-        const producto = buscarProductoPorId(id);
-        if (producto) {
-          resolve(producto);
-        }else {
-          reject(console.warn(`El producto con el id: ${id} no existe`));
-        }
-      }, 3000)
-    })
-  }
+  // const buscarProducto = (id) => {
+  //   return new Promise((resolve, reject) => {
+  //     setTimeout(() => {
+  //       const producto = buscarProductoPorId(id);
+  //       if (producto) {
+  //         resolve(producto);
+  //       }else {
+  //         reject(`El producto con el id: ${id} no existe`);
+  //       }
+  //     }, 3000)
+  //   })
+  // };
 
-  // buscarProducto(1)
+  // buscarProducto(5678)
   //   .then((producto) => {console.log(producto)})
-  //   .catch((err) => {console.log(err)})
+  //   .catch((err) => {console.warn(err)})
 
   return (
     <></>
