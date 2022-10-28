@@ -1,6 +1,5 @@
-import { Link } from 'react-router-dom';
-
 const Navbar = (props) => {
+  //Ejemplo de desestructuración
   const {title} = props;
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -22,25 +21,30 @@ const Navbar = (props) => {
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
             <li className="nav-item">
-              <Link to='/'>
-                <div className="btn btn-secondary mx-3">Home</div>
-              </Link>
+              <a className="nav-link active" aria-current="page" href="/">
+                Home
+              </a>
             </li>
             <li className="nav-item">
-              <Link to='/about-us'>
-                <div className="btn btn-secondary mx-3">About Us</div>
-              </Link>
+              <a className="nav-link" href="/">
+                Link
+              </a>
             </li>
             <li className="nav-item">
-              <Link to='/contact'>
-                <div className="btn btn-secondary mx-3">Contact</div>
-              </Link>
+              <a
+                className="nav-link disabled"
+                href="/"
+                tabIndex="-1"
+                aria-disabled="true"
+              >
+                Disabled
+              </a>
             </li>
           </ul>
         </div>
       </div>
     </nav>
-  )
-}
+  );
+};
 
-export default Navbar
+export default Navbar;
