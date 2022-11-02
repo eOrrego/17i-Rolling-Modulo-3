@@ -1,7 +1,7 @@
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 const Navbar = (props) => {
-  const {title} = props;
+  const { title } = props;
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
       <div className="container-fluid">
@@ -21,26 +21,35 @@ const Navbar = (props) => {
         </button>
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-            <li className="nav-item">
-              <Link to='/'>
-                <div className="btn btn-secondary mx-3">Home</div>
-              </Link>
+            <li>
+              <NavLink
+                to="/"
+                className={(isActive) => (isActive ? 'text-decoration-none mx-3 text-white' : 'text-danger')}
+              >
+                Home
+              </NavLink>
             </li>
-            <li className="nav-item">
-              <Link to='/about-us'>
-                <div className="btn btn-secondary mx-3">About Us</div>
-              </Link>
+            <li>
+              <NavLink
+                to="/about-us"
+                className={(isActive) => (isActive ? 'text-decoration-none mx-3 text-white' : 'text-danger')}
+              >
+                About Us
+              </NavLink>
             </li>
-            <li className="nav-item">
-              <Link to='/contact'>
-                <div className="btn btn-secondary mx-3">Contact</div>
-              </Link>
+            <li>
+              <NavLink
+                to="/contact"
+                className={(isActive) => (isActive ? 'text-decoration-none mx-3 text-white' : 'text-danger')}
+              >
+                Contact
+              </NavLink>
             </li>
           </ul>
         </div>
       </div>
     </nav>
-  )
-}
+  );
+};
 
-export default Navbar
+export default Navbar;

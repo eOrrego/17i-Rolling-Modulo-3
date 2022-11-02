@@ -1,6 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 
 const Card = ({name, stock, img}) => {
+  // En react-router v5 --> useHistory().
   const navigate = useNavigate();
   const redirectToDetails = () => {
     navigate(`/detail/${name}`)
