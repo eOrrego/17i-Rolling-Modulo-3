@@ -1,9 +1,20 @@
+import { useState } from 'react';
+import { Button } from 'react-bootstrap';
 import { NavLink } from 'react-router-dom';
+import FormRegister from '../FormRegister/FormRegister';
+import ModalCustom from '../Modal/ModalCustom';
 
 const Navbar = (props) => {
   const { title } = props;
+  const [showModal, setShowModal] = useState(false);
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+      <ModalCustom
+        show={showModal}
+        title="Registrate"
+        handleClose={() => setShowModal(!showModal)}
+        FormRegister={FormRegister}
+      />
       <div className="container-fluid">
         <a className="navbar-brand" href="/">
           {title}
@@ -24,7 +35,11 @@ const Navbar = (props) => {
             <li>
               <NavLink
                 to="/"
-                className={(isActive) => (isActive ? 'text-decoration-none mx-3 text-white' : 'text-danger')}
+                className={({ isActive }) =>
+                  isActive
+                    ? 'text-decoration-none mx-3 text-white'
+                    : 'text-decoration-none mx-3 text-danger'
+                }
               >
                 Home
               </NavLink>
@@ -32,7 +47,11 @@ const Navbar = (props) => {
             <li>
               <NavLink
                 to="/about-us"
-                className={(isActive) => (isActive ? 'text-decoration-none mx-3 text-white' : 'text-danger')}
+                className={({ isActive }) =>
+                  isActive
+                    ? 'text-decoration-none mx-3 text-white'
+                    : 'text-decoration-none mx-3 text-danger'
+                }
               >
                 About Us
               </NavLink>
@@ -40,10 +59,23 @@ const Navbar = (props) => {
             <li>
               <NavLink
                 to="/contact"
-                className={(isActive) => (isActive ? 'text-decoration-none mx-3 text-white' : 'text-danger')}
+                className={({ isActive }) =>
+                  isActive
+                    ? 'text-decoration-none mx-3 text-white'
+                    : 'text-decoration-none mx-3 text-danger'
+                }
               >
                 Contact
               </NavLink>
+            </li>
+            <li className="ml-5">
+              <Button
+                className="btn btn-danger ml-5"
+                size="sm"
+                onClick={() => setShowModal(!showModal)}
+              >
+                Registrate
+              </Button>
             </li>
           </ul>
         </div>

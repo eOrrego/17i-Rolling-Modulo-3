@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
+import { Row } from 'react-bootstrap';
 import Card from '../components/Card/Card';
 import Loader from '../components/Loader/Loader';
 
@@ -43,11 +44,11 @@ const Home = () => {
               </h4>
             </div>
           )}
-          <div className="row">
+          <Row>
             {pokemones.map((pokemon) => (
               <Card key={pokemon.name} name={pokemon.name} />
             ))}
-          </div>
+          </Row>
         </div>
       </Loader>
       <div className="row justify-content-between mt-5">
