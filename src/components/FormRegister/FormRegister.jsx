@@ -1,16 +1,26 @@
 import { Formik } from 'formik';
+import { useEffect } from 'react';
 import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
+import { ActionTypes, useContextState } from '../../context/contextState';
 import { schemaFormRegister } from '../../utils/ValidateForms/validateForms';
 
 const FormRegister = () => {
+  const { contextState, setContextState } = useContextState();
+  useEffect(() => {
+    console.log(contextState.userLogged);
+  }, [contextState.userLogged])
   return (
     <Formik
       validationSchema={schemaFormRegister}
       onSubmit={(values, actions) => {
-        console.log(values)
+        localStorage.setItem('users', JSON.stringify(values));
+        setContextState({
+          type: ActionTypes.SET_USER_LOGIN,
+          value: true,
+        })
         actions.resetForm();
       }}
       initialValues={{
