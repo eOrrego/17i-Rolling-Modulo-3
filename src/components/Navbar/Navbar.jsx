@@ -1,12 +1,22 @@
 import { useState } from 'react';
 import { Button } from 'react-bootstrap';
 import { NavLink } from 'react-router-dom';
+import { ActionTypes, useContextState } from '../../context/contextState';
 import FormRegister from '../FormRegister/FormRegister';
 import ModalCustom from '../Modal/ModalCustom';
 
 const Navbar = (props) => {
   const { title } = props;
   const [showModal, setShowModal] = useState(false);
+  const { contextState, setContextState } = useContextState();
+
+  const logout = () => {
+    localStorage.removeItem('users');
+    setContextState({
+      type: ActionTypes.SET_USER_LOGIN,
+      value: false,
+    })
+  }
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
       <ModalCustom
@@ -68,15 +78,15 @@ const Navbar = (props) => {
                 Contact
               </NavLink>
             </li>
-            <li className="ml-5">
-              <Button
-                className="btn btn-danger ml-5"
-                size="sm"
-                onClick={() => setShowModal(!showModal)}
-              >
-                Registrate
-              </Button>
-            </li>
+              <li className="ml-5">
+                <Button
+                  className="btn btn-danger ml-5"
+                  size="sm"
+                  onClick={ contextState.userLogged ? () => logout()  : () => setShowModal(!showModal)}
+                >
+                  { contextState.userLogged ? 'Cerrar Sesión' : 'Registrate' }
+                </Button>
+              </li>
           </ul>
         </div>
       </div>

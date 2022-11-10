@@ -2,16 +2,17 @@ import React, { useContext } from 'react';
 
 export const initialState = {
   userLogged: false,
-  userData: {}
+  userData: {},
+  isLoading: false, 
 };
 
 export const ActionTypes = {
   SET_USER_LOGIN: 'SET_USER_LOGIN',
 };
 
+console.log(initialState);
 export const reducer = (state = {}, action) => {
   const {type, value} = action;
-  console.log(state);
   switch (type) {
     case ActionTypes.SET_USER_LOGIN: {
       console.log('aqui', {
