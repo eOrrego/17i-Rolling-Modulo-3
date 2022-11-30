@@ -6,7 +6,7 @@ import PublicRoutes from './Routes/PublicRoutes';
 const App = () => {
   const { setContextState } = useContextState();
   useEffect(() => {
-    const haveUser = JSON.parse(localStorage.getItem('users'));
+    const haveUser = JSON.parse(localStorage.getItem('token'));
     if (haveUser) {
       setContextState({ type: ActionTypes.SET_USER_LOGIN, value: true });
     }

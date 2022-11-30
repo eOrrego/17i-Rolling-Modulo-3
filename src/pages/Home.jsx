@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { Row } from 'react-bootstrap';
 import Card from '../components/Card/Card';
 import Loader from '../components/Loader/Loader';
+import { useContextState } from '../context/contextState';
 
 const Home = () => {
   const [pokemones, setPokemones] = useState([]);
@@ -13,6 +14,7 @@ const Home = () => {
     next: '',
     prev: null,
   });
+  const { contextState } = useContextState();
 
   const fetchPokemones = async (url) => {
     try {
@@ -34,6 +36,8 @@ const Home = () => {
 
   return (
     <div className="container">
+      {
+        contextState.userLogged ? <>
       <Loader isLoading={loading}>
         <div className="row text-center mt-5">
           <h1 className="text-info">POKEMONES</h1>
@@ -72,6 +76,10 @@ const Home = () => {
           </button>
         )}
       </div>
+        </> : <div>
+        <h1 className="text-info">Debe iniciar Sesión</h1>
+        </div>
+      }
     </div>
   );
 };

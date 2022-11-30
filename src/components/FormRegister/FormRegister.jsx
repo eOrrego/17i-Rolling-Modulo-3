@@ -1,26 +1,29 @@
 import { Formik } from 'formik';
-import { useEffect } from 'react';
 import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import { ActionTypes, useContextState } from '../../context/contextState';
+import { userRegister } from '../../services/userService';
+import { setLocalStorage } from '../../utils/localStorageHelper';
 import { schemaFormRegister } from '../../utils/ValidateForms/validateForms';
 
 const FormRegister = () => {
-  const { contextState, setContextState } = useContextState();
-  useEffect(() => {
-    console.log(contextState.userLogged);
-  }, [contextState.userLogged])
+  const { setContextState } = useContextState();
   return (
     <Formik
       validationSchema={schemaFormRegister}
-      onSubmit={(values, actions) => {
-        localStorage.setItem('users', JSON.stringify(values));
+      onSubmit={async (values, actions) => {
+        const {data} = await userRegister({
+          email: values.email,
+          password: values.password,
+          name: values.firstName + ' ' + values.lastName,
+        })
         setContextState({
           type: ActionTypes.SET_USER_LOGIN,
           value: true,
         })
+        setLocalStorage('token', data)
         actions.resetForm();
       }}
       initialValues={{
