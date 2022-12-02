@@ -7,3 +7,10 @@ export const getAllProducts = async () => {
     console.error(error);
   }
 }
+export const createProducts = async (data) => {
+  try {
+    return await clientAxios.post('/product', data)
+  } catch (error) {
+    console.error(error);
+  }
+}
