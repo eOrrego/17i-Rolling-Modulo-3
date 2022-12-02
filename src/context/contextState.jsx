@@ -8,20 +8,22 @@ export const initialState = {
 
 export const ActionTypes = {
   SET_USER_LOGIN: 'SET_USER_LOGIN',
+  SET_USER_DATA: 'SET_USER_DATA',
 };
 
-console.log(initialState);
 export const reducer = (state = {}, action) => {
   const {type, value} = action;
   switch (type) {
     case ActionTypes.SET_USER_LOGIN: {
-      console.log('aqui', {
-        ...state,
-        userLogged: value,
-      })
       return {
         ...state,
-        userLogged: action.value,
+        userLogged: value,
+      };
+    }
+    case ActionTypes.SET_USER_DATA: {
+      return {
+        ...state,
+        userData: value,
       };
     }
     default:

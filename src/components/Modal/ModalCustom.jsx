@@ -1,4 +1,3 @@
-import { Button } from 'react-bootstrap';
 import Modal from 'react-bootstrap/Modal';
 
 const ModalCustom = ({show, title, handleClose, FormRegister}) => {
@@ -10,14 +9,6 @@ const ModalCustom = ({show, title, handleClose, FormRegister}) => {
         <Modal.Body>
           <FormRegister />
         </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Close
-          </Button>
-          <Button variant="primary" onClick={handleClose}>
-            Save
-          </Button>
-        </Modal.Footer>
       </Modal>
   )
 }

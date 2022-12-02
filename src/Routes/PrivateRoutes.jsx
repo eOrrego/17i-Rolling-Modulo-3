@@ -1,10 +1,10 @@
 import { Navigate } from 'react-router-dom';
+import { useContextState } from '../context/contextState';
 
 const PrivateRoutes = ({children}) => {
-  const user = localStorage.getItem('userLogged')
-  const roles = localStorage.getItem('roles')
+  const { contextState } = useContextState();
   return (
-    user && roles.includes('Admin') ? children : <Navigate to='/' />
+    contextState.userLogged && contextState.userData.role === 'ADMIN' ? children : <Navigate to='/' />
   )
 }
 

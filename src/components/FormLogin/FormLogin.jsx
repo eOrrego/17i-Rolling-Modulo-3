@@ -5,21 +5,20 @@ import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import { useNavigate } from 'react-router-dom';
 import { ActionTypes, useContextState } from '../../context/contextState';
-import { userRegister } from '../../services/userService';
+import { userLogin } from '../../services/userService';
 import { setLocalStorage } from '../../utils/localStorageHelper';
-import { schemaFormRegister } from '../../utils/ValidateForms/validateForms';
+import { schemaFormLogin } from '../../utils/ValidateForms/validateForms';
 
-const FormRegister = () => {
+const FormLogin = () => {
   const { setContextState } = useContextState();
   const navigate = useNavigate();
   return (
     <Formik
-      validationSchema={schemaFormRegister}
+      validationSchema={schemaFormLogin}
       onSubmit={async (values, actions) => {
-        const {data} = await userRegister({
+        const {data} = await userLogin({
           email: values.email,
           password: values.password,
-          name: values.firstName + ' ' + values.lastName,
         })
         setContextState({
           type: ActionTypes.SET_USER_LOGIN,
@@ -31,15 +30,15 @@ const FormRegister = () => {
         })
         setLocalStorage('token', data.token)
         setLocalStorage('user', data.userData)
-        navigate('/verify-account')
+        if (data.userData.isVerified && data.userData.role === "ADMIN") {
+          console.log(data.userData.isVerified, data.userData.role)
+          navigate('/admin')
+        }
         actions.resetForm();
       }}
       initialValues={{
-        firstName: '',
-        lastName: '',
         email: '',
         password: '',
-        terms: false,
       }}
     >
       {({
@@ -51,34 +50,7 @@ const FormRegister = () => {
         isSubmitting,
       }) => (
         <Form noValidate onSubmit={handleSubmit}>
-          <Row className="mb-3">
-            <Form.Group as={Col} md="6" controlId="validationFirstName">
-              <Form.Label>First name</Form.Label>
-              <Form.Control
-                type="text"
-                name="firstName"
-                value={values.firstName}
-                onChange={handleChange}
-                isValid={touched.firstName && !errors.firstName}
-                isInvalid={!!errors.firstName}
-                feedback={errors.firstName}
-                feedbackType="invalid"
-              />
-              <Form.Control.Feedback type="invalid">
-                {errors.firstName}
-              </Form.Control.Feedback>
-            </Form.Group>
-            <Form.Group as={Col} md="6" controlId="validationLastName">
-              <Form.Label>Last name</Form.Label>
-              <Form.Control
-                type="text"
-                name="lastName"
-                value={values.lastName}
-                onChange={handleChange}
-              />
-            </Form.Group>
-          </Row>
-          <Row>
+          <Row className="mb-4">
             <Form.Group as={Col} md="6" controlId="validationFormikEmail">
               <Form.Label>Email</Form.Label>
               <Form.Control
@@ -112,23 +84,11 @@ const FormRegister = () => {
               </Form.Control.Feedback>
             </Form.Group>
           </Row>
-          <Form.Group className="mb-3 mt-3">
-            <Form.Check
-              required
-              name="terms"
-              label="Agree to terms and conditions"
-              onChange={handleChange}
-              isInvalid={!!errors.terms}
-              feedback={errors.terms}
-              feedbackType="invalid"
-              id="validationFormik0"
-            />
-          </Form.Group>
-          <Button type="submit" disabled={isSubmitting}>Registrarse</Button>
+          <Button type="submit" disabled={isSubmitting}>Iniciá Sesión</Button>
         </Form>
       )}
     </Formik>
   );
 };
 
-export default FormRegister;
+export default FormLogin;

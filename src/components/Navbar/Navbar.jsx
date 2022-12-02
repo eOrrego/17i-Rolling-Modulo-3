@@ -3,20 +3,27 @@ import { Button } from 'react-bootstrap';
 import { NavLink } from 'react-router-dom';
 import { ActionTypes, useContextState } from '../../context/contextState';
 import FormRegister from '../FormRegister/FormRegister';
+import FormLogin from '../FormLogin/FormLogin';
 import ModalCustom from '../Modal/ModalCustom';
 
 const Navbar = (props) => {
   const { title } = props;
   const [showModal, setShowModal] = useState(false);
+  const [showModalLogin, setShowModalLogin] = useState(false);
   const { contextState, setContextState } = useContextState();
 
   const logout = () => {
-    localStorage.removeItem('users');
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
     setContextState({
       type: ActionTypes.SET_USER_LOGIN,
       value: false,
-    })
-  }
+    });
+    setContextState({
+      type: ActionTypes.SET_USER_DATA,
+      value: {},
+    });
+  };
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
       <ModalCustom
@@ -24,6 +31,12 @@ const Navbar = (props) => {
         title="Registrate"
         handleClose={() => setShowModal(!showModal)}
         FormRegister={FormRegister}
+      />
+      <ModalCustom
+        show={showModalLogin}
+        title="Login"
+        handleClose={() => setShowModalLogin(!showModalLogin)}
+        FormRegister={FormLogin}
       />
       <div className="container-fluid">
         <a className="navbar-brand" href="/">
@@ -78,15 +91,30 @@ const Navbar = (props) => {
                 Contact
               </NavLink>
             </li>
+            <li className="ml-5">
+              <Button
+                className="btn btn-danger ml-5"
+                size="sm"
+                onClick={
+                  contextState.userLogged
+                    ? () => logout()
+                    : () => setShowModal(!showModal)
+                }
+              >
+                {contextState.userLogged ? 'Cerrar Sesión' : 'Registrate'}
+              </Button>
+            </li>
+            {!contextState.userLogged && (
               <li className="ml-5">
                 <Button
-                  className="btn btn-danger ml-5"
+                  className="btn btn-danger mx-3"
                   size="sm"
-                  onClick={ contextState.userLogged ? () => logout()  : () => setShowModal(!showModal)}
+                  onClick={() => setShowModalLogin(!showModalLogin)}
                 >
-                  { contextState.userLogged ? 'Cerrar Sesión' : 'Registrate' }
+                  Login
                 </Button>
               </li>
+            )}
           </ul>
         </div>
       </div>
