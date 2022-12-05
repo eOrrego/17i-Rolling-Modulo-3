@@ -13,7 +13,6 @@ const Admin = () => {
     setLoading(true);
     const fetchProducts = async () => {
       const { data } = await getAllProducts();
-      console.log(data);
       setProductos(data);
     };
     fetchProducts();
@@ -39,8 +38,8 @@ const Admin = () => {
               </tr>
             </thead>
             <tbody>
-              {productos.map((producto, index) => (
-                <tr>
+              {productos.map((producto, index) => ( 
+                <tr key={producto.name}>
                   <td>{++index}</td>
                   <td>{producto.name}</td>
                   <td>{producto.price}</td>

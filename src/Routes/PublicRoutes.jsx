@@ -28,7 +28,7 @@ const PublicRoutes = () => {
   }, []);
   return (
     <>
-      <Navbar title="Rolling Code <>" />
+      <Navbar title="Store SteveO 🕋" />
       {/* En react-router v5 Routes = Switch */}
       <Routes>
         <Route path="/" element={<Home />} />

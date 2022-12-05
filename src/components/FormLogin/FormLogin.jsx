@@ -31,9 +31,8 @@ const FormLogin = () => {
         setLocalStorage('token', data.token)
         setLocalStorage('user', data.userData)
         if (data.userData.isVerified && data.userData.role === "ADMIN") {
-          console.log(data.userData.isVerified, data.userData.role)
-          navigate('/admin')
-        }
+          navigate('/admin');
+        }else navigate('/');
         actions.resetForm();
       }}
       initialValues={{

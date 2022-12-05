@@ -9,7 +9,7 @@ export const getAllProducts = async () => {
 }
 export const createProducts = async (data) => {
   try {
-    return await clientAxios.post('/product', data)
+    return await clientAxios.post('/createProduct', data)
   } catch (error) {
     console.error(error);
   }

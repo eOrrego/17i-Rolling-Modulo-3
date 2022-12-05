@@ -13,9 +13,13 @@ const Home = () => {
   useEffect(() => {
     setLoading(true);
     const fetchProducts = async () => {
-      const {data} = await getAllProducts()
-      console.log(data)
-      setProductos(data)
+      try {
+        const {data} = await getAllProducts();
+        console.log(data);
+        setProductos(data);
+      } catch (error) {
+        console.log(error);
+      }
     };
     fetchProducts();
     setLoading(false);

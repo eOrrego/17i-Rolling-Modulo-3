@@ -38,10 +38,10 @@ const Navbar = (props) => {
         handleClose={() => setShowModalLogin(!showModalLogin)}
         FormRegister={FormLogin}
       />
-      <div className="container-fluid">
-        <a className="navbar-brand" href="/">
+      <div className="container">
+        <span className="navbar-brand">
           {title}
-        </a>
+        </span>
         <button
           className="navbar-toggler"
           type="button"
@@ -60,7 +60,7 @@ const Navbar = (props) => {
                 to="/"
                 className={({ isActive }) =>
                   isActive
-                    ? 'text-decoration-none mx-3 text-white'
+                    ? 'btn btn-warning text-decoration-none mx-2 text-black'
                     : 'text-decoration-none mx-3 text-danger'
                 }
               >
@@ -72,8 +72,8 @@ const Navbar = (props) => {
                 to="/about-us"
                 className={({ isActive }) =>
                   isActive
-                    ? 'text-decoration-none mx-3 text-white'
-                    : 'text-decoration-none mx-3 text-danger'
+                    ? 'btn btn-warning text-decoration-none mx-2 text-black'
+                    : 'btn btn-secondary text-decoration-none mx-2 text-white'
                 }
               >
                 About Us
@@ -84,17 +84,34 @@ const Navbar = (props) => {
                 to="/contact"
                 className={({ isActive }) =>
                   isActive
-                    ? 'text-decoration-none mx-3 text-white'
-                    : 'text-decoration-none mx-3 text-danger'
+                    ? 'btn btn-warning text-decoration-none mx-2 text-black'
+                    : 'btn btn-secondary text-decoration-none mx-2 text-white'
                 }
               >
                 Contact
               </NavLink>
             </li>
-            <li className="ml-5">
+            {
+              contextState.userData.role === "ADMIN" &&(
+
+            <li>
+              <NavLink
+                to="/admin"
+                className={({ isActive }) =>
+                  isActive
+                    ? 'btn btn-warning text-decoration-none mx-2 text-black'
+                    : 'btn btn-secondary text-decoration-none mx-2 text-white'
+                }
+              >
+                ADMIN
+              </NavLink>
+            </li>
+              )
+            }
+            <li className="ms-5">
+            <span className='ms-5 me-2 text-white'>{contextState.userData.name}</span>
               <Button
-                className="btn btn-danger ml-5"
-                size="sm"
+                className="btn btn-danger text-decoration-none mx-2 text-white p-2"
                 onClick={
                   contextState.userLogged
                     ? () => logout()
@@ -107,8 +124,7 @@ const Navbar = (props) => {
             {!contextState.userLogged && (
               <li className="ml-5">
                 <Button
-                  className="btn btn-danger mx-3"
-                  size="sm"
+                  className="btn btn-primary text-decoration-none mx-2 text-white p-2"
                   onClick={() => setShowModalLogin(!showModalLogin)}
                 >
                   Login
