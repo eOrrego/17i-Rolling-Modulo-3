@@ -30,7 +30,7 @@ const Home = () => {
         contextState.userLogged ? <>
       <Loader isLoading={loading}>
         <div className="row text-center mt-5">
-          <h1 className="text-info">PRODUCTOS</h1>
+          <h1 className="text-info">PRODUCTOS DISPONIBLES</h1>
           {error && (
             <div>
               <h4 className="text-danger font-weight-700">
